@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'npm test'
+                sh 'npm test --watchAll'
             }
         }
         // stage('Deliver') {
