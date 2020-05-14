@@ -8,6 +8,7 @@ pipeline {
         }
         stage('Test') {
             steps {
+                sh "npm install -g yarn"
                 sh 'yarn test --watchAll'
             }
         }
