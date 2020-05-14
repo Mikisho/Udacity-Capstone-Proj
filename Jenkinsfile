@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'yarn add --save-dev cross-env'
+                sh 'npm install --save-dev cross-env'
                 sh 'yarn test --watchAll'
             }
         }
