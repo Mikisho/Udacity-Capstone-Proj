@@ -13,10 +13,12 @@ COPY . /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 # install and cache dependencies
-RUN npm install
+RUN npm install -g yarn
+RUN yarn install
+RUN yarn test
 
 #build the project 
-RUN npm run build
+RUN yarn build
 
 # Stage 1
 # set up deployment environment

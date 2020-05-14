@@ -2,6 +2,8 @@ pipeline {
     agent any
     environment { 
         CI = 'true'
+        registry = 'mickey24/capestoneproj'
+        registryCredential = 'dockerhub'
     }
     stages {
         stage('Build') {
@@ -17,12 +19,17 @@ pipeline {
                 sh 'yarn test'
             }
         }
-        // stage('Deliver') {
-        //     steps {
-        //         sh './jenkins/scripts/deliver.sh'
-        //         input message: 'Finished using the web site? (Click "Proceed" to continue)'
-        //         sh './jenkins/scripts/kill.sh'
-        //     }
-        // }
+        stage('Building Docker image') {
+            steps {
+                sh './run_docker.sh'
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+            }
+        }
+        stage('Add to Dockerhub') {
+            steps {
+                sh './upload_docker.sh'
+            }
+        } 
+     
     }
 }
