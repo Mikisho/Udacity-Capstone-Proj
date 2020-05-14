@@ -13,7 +13,6 @@ COPY . /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 # install and cache dependencies
-RUN npm install -g yarn
 RUN yarn install
 RUN yarn test
 
