@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TitleHeader = (props) => {
-    return <h1 className={props.className}>{props.title}</h1>
+    return <h1 className={props.className}>{props.title}</h1
 }
 
 TitleHeader.propTypes = {
