@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh "sudo chown -R $USER /usr/local"
-                sh "npm install -g yarn"
+                sh "sudo npm install -g yarn"
                 sh 'yarn install'
             }
         }
