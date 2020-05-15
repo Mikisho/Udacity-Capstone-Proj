@@ -1,5 +1,5 @@
 # Stage 0, "build-stage", based on Node.js, to build and compile the frontend
-FROM node:alpine
+FROM node:10.19.0-alpine
 
 # set working directory
 # this is the working folder in the container 

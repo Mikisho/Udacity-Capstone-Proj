@@ -12,4 +12,4 @@ docker image ls
 
 # Step 3: 
 # Run flask app
-docker run -p 3001:80 ucapestoneproj
+docker run -p 3001:3000 ucapestoneproj
