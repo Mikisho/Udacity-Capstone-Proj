@@ -4,10 +4,10 @@ FROM node:latest
 # set working directory
 # this is the working folder in the container 
 # from which the app will be running from
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# copy everything to /app directory
-COPY package*.json ./
+# copy package.json to /app directory
+COPY package*.json /app
 
 # install and cache dependencies
 RUN yarn cache clean
@@ -17,7 +17,7 @@ RUN yarn install
 COPY . .
 
 # add the node_modules folder to $PATH
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
 #build the project 
 RUN yarn build
@@ -28,7 +28,7 @@ RUN yarn build
 FROM nginx:latest
 
 # copy the build folder from react to the root of nginx (www)
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
+COPY --from=build /app/build /usr/share/nginx/html
 
 # expose port 80 to the outer world
 EXPOSE 80
