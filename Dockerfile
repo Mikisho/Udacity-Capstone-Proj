@@ -28,7 +28,7 @@ RUN yarn build
 FROM nginx:latest
 
 # copy the build folder from react to the root of nginx (www)
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build-stage /app/build /usr/share/nginx/html
 
 # expose port 80 to the outer world
 EXPOSE 80
