@@ -10,7 +10,6 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # install and cache dependencies
-RUN npm install -g yarn
 RUN yarn cache clean
 RUN yarn install
 
