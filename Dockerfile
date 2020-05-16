@@ -7,7 +7,7 @@ FROM node:latest
 WORKDIR /app
 
 # copy package.json to /app directory
-COPY package*.json /app
+COPY package*.json ./
 
 # install and cache dependencies
 RUN yarn cache clean
