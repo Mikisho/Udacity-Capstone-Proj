@@ -17,7 +17,7 @@ RUN yarn install
 COPY . .
 
 # add the node_modules folder to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 #build the project 
 RUN yarn build
@@ -31,7 +31,7 @@ FROM nginx:latest
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
 
 # expose port 80 to the outer world
-EXPOSE 5000
+EXPOSE 80
 
 # start nginx 
 CMD ["nginx", "-g", "daemon off;"]
