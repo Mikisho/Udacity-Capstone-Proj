@@ -7,16 +7,18 @@ FROM node:10.19.0-alpine
 WORKDIR /app
 
 # copy everything to /app directory
-COPY . /app
-
-# add the node_modules folder to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+COPY package.json /app
 
 # install and cache dependencies
 RUN npm install -g yarn
 RUN yarn cache clean
 RUN yarn install
-RUN yarn test
+
+# copy everything to /app directory
+COPY . /app
+
+# add the node_modules folder to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
 #build the project 
 RUN yarn build
@@ -30,7 +32,7 @@ FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 
 # expose port 80 to the outer world
-EXPOSE 80
+EXPOSE 5000
 
 # start nginx 
 CMD ["nginx", "-g", "daemon off;"]
