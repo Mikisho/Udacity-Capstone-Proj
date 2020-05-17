@@ -1,10 +1,12 @@
 pipeline {
-    agent any
-    environment { 
+    environment {
         CI = 'true'
         registry = 'mickey24/capestoneproj'
         registryCredential = 'dockerhub'
+        dockerImage = ''
     }
+    agent any
+
     stages {
         stage('Build') {
             steps {
@@ -21,15 +23,26 @@ pipeline {
         }
         stage('Building Docker image') {
             steps {
-                sh './run_docker.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
             }
         }
-        stage('Add to Dockerhub') {
+        stage('Deploy to Dockerhub') {
             steps {
-                sh './upload_docker.sh'
+                script {
+                    docker.withRegistry('', registryCredential) {
+                        dockerImage.push()
+                    }
+                }
             }
-        } 
-     
+
+        }
+        stage('Remove Unused docker image') {
+            steps {
+                sh "docker rmi $registry:$BUILD_NUMBER"
+            }
+        }
+
     }
 }
