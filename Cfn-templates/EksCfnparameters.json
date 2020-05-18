@@ -1,0 +1,53 @@
+[{
+        "ParameterKey": "KeyName",
+        "ParameterValue": "AWS-Proj"
+    },
+    {
+        "ParameterKey": "NodeImageId",
+        "ParameterValue": "ami-085925f297f89fce1"
+    },
+    {
+        "ParameterKey": "NodeInstanceType",
+        "ParameterValue": "t3.medium"
+    },
+    {
+        "ParameterKey": "NodeAutoScalingGroupMinSize",
+        "ParameterValue": "1"
+    },
+    {
+        "ParameterKey": "NodeAutoScalingGroupMaxSize",
+        "ParameterValue": "4"
+    },
+    {
+        "ParameterKey": "NodeAutoScalingGroupDesiredCapacity",
+        "ParameterValue": "3"
+    },
+    {
+        "ParameterKey": "NodeVolumeSize",
+        "ParameterValue": "20"
+    },
+    {
+        "ParameterKey": "ClusterName",
+        "ParameterValue": "UdacityCapestone-eks"
+    },
+    {
+        "ParameterKey": "BootstrapArguments",
+        "ParameterValue": ""
+    },
+    {
+        "ParameterKey": "NodeGroupName",
+        "ParameterValue": "UdacityCapestone-node"
+    },
+    {
+        "ParameterKey": "ClusterControlPlaneSecurityGroup",
+        "ParameterValue": "AWS::EC2::SecurityGroup::Id"
+    },
+    {
+        "ParameterKey": "VpcId",
+        "ParameterValue": "AWS::EC2::VPC::Id"
+    },
+    {
+        "ParameterKey": "Subnets",
+        "ParameterValue": "Subnet01Block"
+    }
+]
