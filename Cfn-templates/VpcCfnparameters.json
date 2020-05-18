@@ -3,7 +3,7 @@
         "ParameterValue": "10.0.0.0/16"
     },
     {
-        "ParameterKey": " Subnet01Block",
+        "ParameterKey": "Subnet01Block",
         "ParameterValue": "10.0.0.0/24"
     },
     {
