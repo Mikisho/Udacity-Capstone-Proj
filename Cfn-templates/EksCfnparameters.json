@@ -1,6 +1,6 @@
 [{
         "ParameterKey": "KeyName",
-        "ParameterValue": "AWS-Proj"
+        "ParameterValue": "Aws-Proj"
     },
     {
         "ParameterKey": "NodeImageId",
