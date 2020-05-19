@@ -28,7 +28,7 @@
     },
     {
         "ParameterKey": "ClusterName",
-        "ParameterValue": "UdacityCapestone-eks"
+        "ParameterValue": "UdacityCapestoneProjEKS"
     },
     {
         "ParameterKey": "BootstrapArguments",
@@ -36,18 +36,18 @@
     },
     {
         "ParameterKey": "NodeGroupName",
-        "ParameterValue": "UdacityCapestone-node"
+        "ParameterValue": "UdacityCapestone-nodes"
     },
     {
         "ParameterKey": "ClusterControlPlaneSecurityGroup",
-        "ParameterValue": "AWS::EC2::SecurityGroup::Id"
+        "ParameterValue": "sg-09dc335f2833cbe76"
     },
     {
         "ParameterKey": "VpcId",
-        "ParameterValue": "AWS::EC2::VPC::Id"
+        "ParameterValue": "vpc-090553989eb589a37"
     },
     {
         "ParameterKey": "Subnets",
-        "ParameterValue": "Subnet01Block"
+        "ParameterValue": "subnet-0057ea5d9ae41c97b,subnet-0d96e8e1c7630d66a,subnet-05d8468e3fe4028c5"
     }
 ]
