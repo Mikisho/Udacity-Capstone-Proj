@@ -44,6 +44,16 @@ pipeline {
             }
         }
 
+        stage('Set current kubectl context') {
+			steps {
+				withAWS(region:'us-east-1', credentials:'aws-credentials') {
+					sh '''
+						kubectl config use-context arn:aws:eks:us-east-1:546586657828:cluster/UdacityCapestoneProjEKS
+					'''
+				}
+			}
+		}
+
         stage('Deploy blue image') {
 			steps {
 				withAWS(region:'us-east-1', credentials:'aws-credentials') {
