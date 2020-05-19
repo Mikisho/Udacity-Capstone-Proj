@@ -44,5 +44,51 @@ pipeline {
             }
         }
 
+        stage('Deploy blue image') {
+			steps {
+				withAWS(region:'us-east-1', credentials:'aws-credentials') {
+					sh '''
+						kubectl apply -f ./blue-controller.json
+					'''
+				}
+			}
+		}
+
+        stage('Deploy green image') {
+			steps {
+				withAWS(region:'us-east-1', credentials:'aws-credentials') {
+					sh '''
+						kubectl apply -f ./green-controller.json
+					'''
+				}
+			}
+		}
+
+        stage('Create the service in the cluster, redirect to blue') {
+			steps {
+				withAWS(region:'us-east-1', credentials:'aws-credentials') {
+					sh '''
+						kubectl apply -f ./blue-service.json
+					'''
+				}
+			}
+		}
+
+        stage('User approval') {
+            steps {
+                input "Ready to redirect traffic to green?"
+            }
+        }
+
+        stage('Create the service in the cluster, redirect to green') {
+			steps {
+				withAWS(region:'us-east-1', credentials:'aws-credentials') {
+					sh '''
+						kubectl apply -f ./green-service.json
+					'''
+				}
+			}
+		}
+
     }
 }

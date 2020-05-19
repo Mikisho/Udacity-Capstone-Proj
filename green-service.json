@@ -1,0 +1,20 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "bluegreenngnix",
+        "labels": {
+            "app": "bluegreenngnix"
+        }
+    },
+    "spec": {
+        "ports": [{
+            "port": 6380,
+            "targetPort": "ngnix-server"
+        }],
+        "selector": {
+            "app": "green"
+        },
+        "type": "LoadBalancer"
+    }
+}
