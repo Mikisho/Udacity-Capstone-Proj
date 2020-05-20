@@ -28,7 +28,7 @@
     },
     {
         "ParameterKey": "ClusterName",
-        "ParameterValue": "UdacityCapestoneProjEKS"
+        "ParameterValue": "UdCapestone"
     },
     {
         "ParameterKey": "BootstrapArguments",
@@ -36,18 +36,18 @@
     },
     {
         "ParameterKey": "NodeGroupName",
-        "ParameterValue": "UdacityCapestone-nodes"
+        "ParameterValue": "UdCapestone-eks-nodes"
     },
     {
         "ParameterKey": "ClusterControlPlaneSecurityGroup",
-        "ParameterValue": "sg-09dc335f2833cbe76"
+        "ParameterValue": "sg-028c2ebd740f5f652"
     },
     {
         "ParameterKey": "VpcId",
-        "ParameterValue": "vpc-090553989eb589a37"
+        "ParameterValue": "vpc-02cf9d8975bf83387"
     },
     {
         "ParameterKey": "Subnets",
-        "ParameterValue": "subnet-0057ea5d9ae41c97b,subnet-0d96e8e1c7630d66a,subnet-05d8468e3fe4028c5"
+        "ParameterValue": "subnet-0824cf2e2af375334,subnet-01031e6274795b765,subnet-0011d502e1e061fe5"
     }
 ]
