@@ -24,7 +24,7 @@
                     "image": "mickey24/capestoneproj",
                     "ports": [{
                         "name": "ngnix-server",
-                        "containerPort": 6380
+                        "containerPort": 80
                     }]
                 }]
             }

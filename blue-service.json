@@ -9,8 +9,8 @@
     },
     "spec": {
         "ports": [{
-            "port": 6380,
-            "targetPort": "ngnix-server"
+            "port": 6000,
+            "targetPort": 80
         }],
         "selector": {
             "app": "blue"
