@@ -45,7 +45,7 @@ pipeline {
             }
         }
 
-        stage('Set current kubectl context') {
+        stage('Update aws current kubectl context') {
 			steps {
 				withAWS(region:'us-east-1', credentials:'aws-credentials') {
 					sh '''
