@@ -199,6 +199,10 @@ Resources:
         - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
         - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
         - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+        - arn:aws:iam::aws:policy/AmazonEKSServicePolicy
+        - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+
 
   NodeSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -209,6 +213,18 @@ Resources:
       Tags:
       - Key: !Sub "kubernetes.io/cluster/${ClusterName}"
         Value: 'owned'
+
+  EKSCluster:
+    Type: "AWS::EKS::Cluster"
+    Properties:
+      Name: !Join [ "", [ !Ref 'AWS::StackName', "-EKS-Cluster" ] ]
+      ResourcesVpcConfig:
+        SecurityGroupIds:
+          - !Ref NodeSecurityGroup
+        SubnetIds:
+          - !Ref Subnets
+        RoleArn: !GetAtt NodeInstanceProfile.Arn
+        Version: 1.16
 
   NodeSecurityGroupIngress:
     Type: AWS::EC2::SecurityGroupIngress
