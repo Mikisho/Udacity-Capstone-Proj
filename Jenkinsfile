@@ -21,16 +21,17 @@ pipeline {
                 sh 'yarn test'
             }
         }
-        stage('Building Docker image') {
+        // stage('Building Docker image') {
+        //     steps {
+        //         script {
+        //             def dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        //         }
+        //     }
+        // }
+        stage('Build & Deploy to Dockerhub') {
             steps {
                 script {
-                    def dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                }
-            }
-        }
-        stage('Deploy to Dockerhub') {
-            steps {
-                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
                     docker.withRegistry('', registryCredential) {
                         dockerImage.push()
                     }
