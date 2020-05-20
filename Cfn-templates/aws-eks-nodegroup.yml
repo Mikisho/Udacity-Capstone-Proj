@@ -222,7 +222,7 @@ Resources:
           - !Ref NodeSecurityGroup
         SubnetIds:
           - !Ref Subnets
-        RoleArn: !GetAtt NodeInstanceProfile.Arn
+        RoleArn: !GetAtt NodeInstanceRole.Arn
         Version: 1.16
 
   NodeSecurityGroupIngress:
