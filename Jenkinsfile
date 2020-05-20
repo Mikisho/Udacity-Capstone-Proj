@@ -45,15 +45,15 @@ pipeline {
             }
         }
 
-        // stage('Update aws current kubectl context') {
-		// 	steps {
-		// 		withAWS(region:'us-east-1', credentials:'aws-credentials') {
-		// 			sh '''
-		// 				aws eks --region us-east-1 update-kubeconfig --name UdCapestone
-		// 			'''
-		// 		}
-		// 	}
-		// }
+        stage('Update aws current kubectl context') {
+			steps {
+				withAWS(region:'us-east-1', credentials:'aws-credentials') {
+					sh '''
+						aws eks --region us-east-1 update-kubeconfig --name UdCapestone
+					'''
+				}
+			}
+		}
 
         stage('Deploy blue image') {
 			steps {
