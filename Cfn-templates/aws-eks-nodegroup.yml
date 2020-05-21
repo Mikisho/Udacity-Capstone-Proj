@@ -222,8 +222,8 @@ Resources:
           - !Ref NodeSecurityGroup
         SubnetIds:
           - !Ref Subnets
-        RoleArn: !GetAtt NodeInstanceRole.Arn
-        Version: 1.14
+      RoleArn: !GetAtt NodeInstanceRole.Arn
+      Version: 1.14
     DependsOn:
       - NodeInstanceRole
 
