@@ -214,19 +214,6 @@ Resources:
       - Key: !Sub "kubernetes.io/cluster/${ClusterName}"
         Value: 'owned'
 
-  EKSCluster:
-    Type: "AWS::EKS::Cluster"
-    Properties:
-      ResourcesVpcConfig:
-        SecurityGroupIds:
-          - !Ref NodeSecurityGroup
-        SubnetIds:
-          - !Ref Subnets
-      RoleArn: !GetAtt NodeInstanceRole.Arn
-      Version: 1.14
-    DependsOn:
-      - NodeInstanceRole
-
   NodeSecurityGroupIngress:
     Type: AWS::EC2::SecurityGroupIngress
     DependsOn: NodeSecurityGroup
