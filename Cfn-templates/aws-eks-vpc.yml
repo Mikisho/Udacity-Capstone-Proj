@@ -110,7 +110,7 @@ Resources:
     Properties:
       VpcId: !Ref VPC
       AvailabilityZone: !Select [2, !GetAZs ""]
-      CidrBlock: !Ref Subnet03Block:
+      CidrBlock: !Ref Subnet03Block
       Tags:
         - Key: Name
           Value: !Sub "${AWS::StackName}-Subnet03"
