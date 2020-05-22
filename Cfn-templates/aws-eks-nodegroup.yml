@@ -164,7 +164,7 @@ Metadata:
           - NodeInstanceType
           - NodeImageId
           - NodeVolumeSize
-          - KeyName
+          # - KeyName
           - BootstrapArguments
       -
         Label:
@@ -309,7 +309,7 @@ Resources:
       IamInstanceProfile: !Ref NodeInstanceProfile
       ImageId: !Ref NodeImageId
       InstanceType: !Ref NodeInstanceType
-      KeyName: !Ref KeyName
+      # KeyName: !Ref KeyName
       SecurityGroups:
       - !Ref NodeSecurityGroup
       BlockDeviceMappings:
