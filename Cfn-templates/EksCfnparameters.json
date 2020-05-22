@@ -1,8 +1,4 @@
 [{
-        "ParameterKey": "KeyName",
-        "ParameterValue": "Aws-Proj"
-    },
-    {
         "ParameterKey": "NodeImageId",
         "ParameterValue": "ami-085925f297f89fce1"
     },
@@ -40,14 +36,14 @@
     },
     {
         "ParameterKey": "ClusterControlPlaneSecurityGroup",
-        "ParameterValue": "sg-028c2ebd740f5f652"
+        "ParameterValue": "sg-0fe07eca4aa658269"
     },
     {
         "ParameterKey": "VpcId",
-        "ParameterValue": "vpc-02cf9d8975bf83387"
+        "ParameterValue": "vpc-09d507d271dee5726"
     },
     {
         "ParameterKey": "Subnets",
-        "ParameterValue": "subnet-0824cf2e2af375334,subnet-01031e6274795b765,subnet-0011d502e1e061fe5"
+        "ParameterValue": "subnet-07df4bb3d340cfe77,subnet-0fc05876a7c5d9638,subnet-01970078e18bb3e6a"
     }
 ]

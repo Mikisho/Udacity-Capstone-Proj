@@ -4,9 +4,9 @@ Description: 'Amazon EKS - Node Group'
 
 Parameters:
 
-  KeyName:
-    Description: The EC2 Key Pair to allow SSH access to the instances
-    Type: AWS::EC2::KeyPair::KeyName
+  # KeyName:
+  #   Description: The EC2 Key Pair to allow SSH access to the instances
+  #   Type: AWS::EC2::KeyPair::KeyName
 
   NodeImageId:
     Type: AWS::EC2::Image::Id
