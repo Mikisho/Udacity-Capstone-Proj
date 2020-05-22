@@ -24,7 +24,7 @@
     },
     {
         "ParameterKey": "ClusterName",
-        "ParameterValue": "UdCapestone"
+        "ParameterValue": "CapestoneEksCluster"
     },
     {
         "ParameterKey": "BootstrapArguments",
