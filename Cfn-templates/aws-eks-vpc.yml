@@ -1,9 +1,6 @@
 ---
-AWSTemplateFormatVersion: '2010-09-09'
-Description: 'Mikias Hundie Amazon EKS VPCs'
-
+Description: Mikias Hundie/Udacity Capestone Proj-2019 CloudFormation file to create VPC to EKS.
 Parameters:
-
   VpcBlock:
     Type: String
     Default: 10.0.0.0/16
@@ -50,158 +47,119 @@ Metadata:
           - Subnet02Block
           - Subnet03Block
 
-Conditions:
-  Has2Azs:
-    Fn::Or:
-      - Fn::Equals:
-        - {Ref: 'AWS::Region'}
-        - ap-south-1
-      - Fn::Equals:
-        - {Ref: 'AWS::Region'}
-        - ap-northeast-2
-      - Fn::Equals:
-        - {Ref: 'AWS::Region'}
-        - ca-central-1
-      - Fn::Equals:
-        - {Ref: 'AWS::Region'}
-        - cn-north-1
-
-  HasMoreThan2Azs:
-    Fn::Not:
-      - Condition: Has2Azs
-
 Resources:
   VPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock:  !Ref VpcBlock
       EnableDnsSupport: true
       EnableDnsHostnames: true
+      CidrBlock: !Ref VpcBlock
       Tags:
-      - Key: Name
-        Value: !Sub '${AWS::StackName}-VPC'
+        - Key: Name
+          Value: !Sub '${AWS::StackName}-VPC'
 
   InternetGateway:
-    Type: "AWS::EC2::InternetGateway"
+    Type: AWS::EC2::InternetGateway
 
-  VPCGatewayAttachment:
-    Type: "AWS::EC2::VPCGatewayAttachment"
+  GatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
     Properties:
-      InternetGatewayId: !Ref InternetGateway
       VpcId: !Ref VPC
-
+      InternetGatewayId: !Ref InternetGateway
+  
   RouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref VPC
       Tags:
-      - Key: Name
-        Value: Public Subnets
-      - Key: Network
-        Value: Public
+        - Key: Network
+          Value: Public
+        - Key: Name
+          Value: Public Subnets
 
   Route:
-    DependsOn: VPCGatewayAttachment
     Type: AWS::EC2::Route
+    DependsOn: GatewayAttachment
     Properties:
       RouteTableId: !Ref RouteTable
       DestinationCidrBlock: 0.0.0.0/0
       GatewayId: !Ref InternetGateway
 
-  Subnet01:
+  Subnet1:
     Type: AWS::EC2::Subnet
-    Metadata:
-      Comment: Subnet 01
     Properties:
-      AvailabilityZone:
-        Fn::Select:
-        - '0'
-        - Fn::GetAZs:
-            Ref: AWS::Region
-      CidrBlock:
-        Ref: Subnet01Block
-      VpcId:
-        Ref: VPC
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      CidrBlock: !Ref Subnet01Block
       Tags:
-      - Key: Name
-        Value: !Sub "${AWS::StackName}-Subnet01"
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-Subnet01"
 
-  Subnet02:
+  Subnet2:
     Type: AWS::EC2::Subnet
-    Metadata:
-      Comment: Subnet 02
     Properties:
-      AvailabilityZone:
-        Fn::Select:
-        - '1'
-        - Fn::GetAZs:
-            Ref: AWS::Region
-      CidrBlock:
-        Ref: Subnet02Block
-      VpcId:
-        Ref: VPC
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [1, !GetAZs ""]
+      CidrBlock: !Ref Subnet02Block
       Tags:
-      - Key: Name
-        Value: !Sub "${AWS::StackName}-Subnet02"
-
-  Subnet03:
-    Condition: HasMoreThan2Azs
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-Subnet02"
+  
+  Subnet3:
     Type: AWS::EC2::Subnet
-    Metadata:
-      Comment: Subnet 03
     Properties:
-      AvailabilityZone:
-        Fn::Select:
-        - '2'
-        - Fn::GetAZs:
-            Ref: AWS::Region
-      CidrBlock:
-        Ref: Subnet03Block
-      VpcId:
-        Ref: VPC
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [2, !GetAZs ""]
+      CidrBlock: !Ref Subnet03Block:
       Tags:
-      - Key: Name
-        Value: !Sub "${AWS::StackName}-Subnet03"
-
-  Subnet01RouteTableAssociation:
+        - Key: Name
+          Value: !Sub "${AWS::StackName}-Subnet03"
+  
+  Subnet1RTAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: !Ref Subnet01
+      SubnetId: !Ref Subnet1
       RouteTableId: !Ref RouteTable
-
-  Subnet02RouteTableAssociation:
+  
+  Subnet2RTAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: !Ref Subnet02
+      SubnetId: !Ref Subnet2
       RouteTableId: !Ref RouteTable
 
-  Subnet03RouteTableAssociation:
-    Condition: HasMoreThan2Azs
+  Subnet3RTAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: !Ref Subnet03
+      SubnetId: !Ref Subnet3
       RouteTableId: !Ref RouteTable
 
-  ControlPlaneSecurityGroup:
+  EKSSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: Cluster communication with worker nodes
+      GroupDescription: Cluster network to worker nodes
       VpcId: !Ref VPC
 
 Outputs:
-
+  VPCID:
+    Description: The VPCId of VPC
+    Value: !Ref VPC
+  
+  SubnetID1:
+    Description: The subnetId of subnet 1
+    Value: !Ref Subnet1
+  
+  SubnetID2:
+    Description: The subnetId of subnet 2
+    Value: !Ref Subnet2
+  
+  SubnetID3:
+    Description: The subnetId of subnet 3
+    Value: !Ref Subnet2
+  
   SubnetIds:
-    Description: All subnets in the VPC
-    Value:
-      Fn::If:
-      - HasMoreThan2Azs
-      - !Join [ ",", [ !Ref Subnet01, !Ref Subnet02, !Ref Subnet03 ] ]
-      - !Join [ ",", [ !Ref Subnet01, !Ref Subnet02 ] ]
+    Description: Subnets from VPC
+    Value: !Join [ ",", [ !Ref Subnet1, !Ref Subnet2, !Ref Subnet3 ] ]
 
   SecurityGroups:
-    Description: Security group for the cluster control plane communication with worker nodes
-    Value: !Join [ ",", [ !Ref ControlPlaneSecurityGroup ] ]
-
-  VpcId:
-    Description: The VPC Id
-    Value: !Ref VPC
+    Description: Security group for the EKS
+    Value: !Join [ ",", [ !Ref EKSSecurityGroup ] ]

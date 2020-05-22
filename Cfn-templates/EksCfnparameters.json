@@ -8,7 +8,7 @@
     },
     {
         "ParameterKey": "NodeInstanceType",
-        "ParameterValue": "t3.medium"
+        "ParameterValue": "t2.small"
     },
     {
         "ParameterKey": "NodeAutoScalingGroupMinSize",
