@@ -13,5 +13,13 @@
     {
         "ParameterKey": "Subnet03Block",
         "ParameterValue": "10.0.2.0/24"
+    },
+    {
+        "ParameterKey": "MysubnetAZ1",
+        "ParameterValue": "us-east-1a"
+    },
+    {
+        "ParameterKey": "MysubnetAZ2",
+        "ParameterValue": "us-east-1d"
     }
 ]
