@@ -86,3 +86,7 @@ yarn-error.log*
 create-eks-cluster.txt
 
 /.kube
+
+EksCfnparameters.json
+VpcCfnparameters.json 
+
